@@ -28,6 +28,8 @@ protected:
 TEST_F(FizzBuzzGameTest, should_say_number_given_a_normal_number)
 {
 	ASSERT_STREQ("2", game->handle(2).c_str());
+	ASSERT_STREQ("4", game->handle(4).c_str());
+	ASSERT_STREQ("19", game->handle(19).c_str());
 }
 
 TEST_F(FizzBuzzGameTest, should_say_fizz_given_a_number_which_is_multiple_of_3)

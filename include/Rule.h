@@ -12,11 +12,8 @@ namespace kata {
 
 class Rule {
 public:
-	Rule(int digit);
 	virtual ~Rule();
 	virtual bool Matched(int num) = 0;
-protected:
-	int _digit;
 };
 
 } /* namespace kata */

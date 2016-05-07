@@ -9,7 +9,7 @@
 
 namespace kata {
 
-MultipleOf::MultipleOf(int digit) : Rule(digit) {
+MultipleOf::MultipleOf(int digit) : _digit(digit) {
 	// TODO Auto-generated constructor stub
 
 }

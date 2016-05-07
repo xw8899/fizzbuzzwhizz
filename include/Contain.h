@@ -18,6 +18,9 @@ public:
 	virtual ~Contain();
 public:
 	virtual bool Matched(int num);
+private:
+	int _digit;
+
 };
 
 } /* namespace kata */

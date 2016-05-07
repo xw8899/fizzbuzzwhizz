@@ -13,7 +13,7 @@ Contain::~Contain() {
 	// TODO Auto-generated destructor stub
 }
 
-Contain::Contain(int digit) : Rule(digit) {
+Contain::Contain(int digit) : _digit(digit) {
 
 }
 

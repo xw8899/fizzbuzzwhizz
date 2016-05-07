@@ -11,6 +11,8 @@
 
 namespace kata {
 class Rule;
+class AllOf;
+class AnyOf;
 class FizzBuzzGame {
 public:
 	FizzBuzzGame(int first, int second, int third);
@@ -25,6 +27,10 @@ private:
 	Rule* _multipleOfFirstDigit;
 	Rule* _multipleOfSecondDigit;
 	Rule* _multipleOfThirdDigit;
+	AllOf* _allOf123;
+	AllOf* _allOf12;
+	AllOf* _allOf23;
+	AnyOf* _anyOf;
 
 
 };

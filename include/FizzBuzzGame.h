@@ -10,22 +10,23 @@
 #include <string>
 
 namespace kata {
-
+class Rule;
 class FizzBuzzGame {
 public:
 	FizzBuzzGame(int first, int second, int third);
+	~FizzBuzzGame();
 	std::string handle(int num);
 
 private:
-	bool contain(int num, int digit);
-	bool IsMultipleOfThirdDigit(int num);
-	bool IsMultipleOfSecondDigit(int num);
-	bool IsMultipleOfFirstDigit(int num);
-	bool IsMultipleOf(int num, int digit);
-
 	int _secondDigit;
 	int _thirdDigit;
 	int _firstDigit;
+	Rule* _containFirstDigit;
+	Rule* _multipleOfFirstDigit;
+	Rule* _multipleOfSecondDigit;
+	Rule* _multipleOfThirdDigit;
+
+
 };
 
 } /* namespace kata */

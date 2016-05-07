@@ -7,6 +7,8 @@
 
 #include <FizzBuzzGame.h>
 #include <sstream>
+#include "Contain.h"
+#include "MultipleOf.h"
 using namespace std;
 namespace kata {
 
@@ -14,56 +16,47 @@ FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	_firstDigit = first;
 	_secondDigit = second;
 	_thirdDigit = third;
+	_containFirstDigit = new Contain(first);
+	_multipleOfFirstDigit = new MultipleOf(first);
+	_multipleOfSecondDigit = new MultipleOf(second);
+	_multipleOfThirdDigit = new MultipleOf(third);
 }
 
-bool FizzBuzzGame::contain(int num, int digit) {
-	int tensDigit = num / 10;
-	return (tensDigit % 10 == digit) || (num % 10 == digit);
-}
-
-bool FizzBuzzGame::IsMultipleOf(int num, int digit) {
-	return (num % digit == 0);
-}
-
-bool FizzBuzzGame::IsMultipleOfThirdDigit(int num) {
-	return IsMultipleOf(num, _thirdDigit);
-}
-
-bool FizzBuzzGame::IsMultipleOfSecondDigit(int num) {
-	return IsMultipleOf(num, _secondDigit);
-}
-
-bool FizzBuzzGame::IsMultipleOfFirstDigit(int num) {
-	return IsMultipleOf(num, _firstDigit);
+FizzBuzzGame::~FizzBuzzGame()
+{
+	delete _containFirstDigit;
+	delete _multipleOfFirstDigit;
+	delete _multipleOfSecondDigit;
+	delete _multipleOfThirdDigit;
 }
 
 string FizzBuzzGame::handle(int num) {
-	if (contain(num, _firstDigit)) {
+	if (_containFirstDigit->Matched(num)) {
 		return "fizz";
 	}
 
-	if (IsMultipleOfThirdDigit(num) && IsMultipleOfSecondDigit(num)
-			&& IsMultipleOfFirstDigit(num)) {
+	if (_multipleOfThirdDigit->Matched(num) && _multipleOfSecondDigit->Matched(num)
+			&& _multipleOfFirstDigit->Matched(num)) {
 		return "fizzbuzzwhizz";
 	}
 
-	if (IsMultipleOfSecondDigit(num)
-			&& IsMultipleOfFirstDigit(num)) {
+	if (_multipleOfSecondDigit->Matched(num)
+			&& _multipleOfFirstDigit->Matched(num)) {
 		return "fizzbuzz";
 	}
-	if (IsMultipleOfThirdDigit(num) && IsMultipleOfSecondDigit(num)) {
+	if (_multipleOfThirdDigit->Matched(num) && _multipleOfSecondDigit->Matched(num)) {
 		return "buzzwhizz";
 	}
 
-	if (IsMultipleOfFirstDigit(num)) {
+	if (_multipleOfFirstDigit->Matched(num)) {
 		return "fizz";
 	}
 
-	if (IsMultipleOfSecondDigit(num)) {
+	if (_multipleOfSecondDigit->Matched(num)) {
 		return "buzz";
 	}
 
-	if (IsMultipleOfThirdDigit(num)) {
+	if (_multipleOfThirdDigit->Matched(num)) {
 		return "whizz";
 	}
 

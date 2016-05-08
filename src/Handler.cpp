@@ -30,8 +30,16 @@ bool Handler::Matched(int num) {
 }
 
 string Handler::Transfer(int num) {
-	if (_successor != 0)
-		return _successor->Transfer(num);
+	if (Matched(num))
+	{
+		return Act(num);
+	}
+	else
+	{
+		if (_successor != 0)
+			return _successor->Transfer(num);
+	}
+
 	return "nohandler";
 }
 

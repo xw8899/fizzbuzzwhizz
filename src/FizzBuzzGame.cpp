@@ -5,10 +5,8 @@
  *      Author: Administrator
  */
 
-#include <DefaultHandler.h>
 #include <FizzBuzzGame.h>
 #include "Handler.h"
-#include "HandlerOfMultiple.h"
 #include "DefaultAction.h"
 #include "FizzAction.h"
 #include "BuzzAction.h"
@@ -23,10 +21,10 @@ FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	_firstDigit = first;
 	_secondDigit = second;
 	_thirdDigit = third;
-	_defaultRule = new DefaultHandler(new DefaultMatcher(), new DefaultAction());
-	_m1 = new HandlerOfMultiple(_defaultRule, new MultipleMatcher(first), new FizzAction());
-	_m2 = new HandlerOfMultiple(_m1, new MultipleMatcher(second), new BuzzAction());
-	_m3 = new HandlerOfMultiple(_m2, new MultipleMatcher(third), new WhizzAction());
+	_defaultRule = new Handler(NULL, new DefaultMatcher(), new DefaultAction());
+	_m1 = new Handler(_defaultRule, new MultipleMatcher(first), new FizzAction());
+	_m2 = new Handler(_m1, new MultipleMatcher(second), new BuzzAction());
+	_m3 = new Handler(_m2, new MultipleMatcher(third), new WhizzAction());
 }
 
 FizzBuzzGame::~FizzBuzzGame()

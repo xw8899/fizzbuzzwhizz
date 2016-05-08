@@ -7,15 +7,17 @@
 
 #include <Handler.h>
 #include <Action.h>
+#include "Matcher.h"
 namespace kata {
 
-Handler::Handler(Handler* s, Action* action) : _successor(s), _action(action) {
+Handler::Handler(Handler* s, Matcher* matcher, Action* action) : _successor(s), _matcher(matcher), _action(action) {
 	// TODO Auto-generated constructor stub
 
 }
 
 Handler::~Handler() {
 	delete _action;
+	delete _matcher;
 }
 
 string Handler::Act(int num)
@@ -24,7 +26,7 @@ string Handler::Act(int num)
 }
 
 bool Handler::Matched(int num) {
-	return true;
+	return _matcher->Matched(num);
 }
 
 string Handler::Transfer(int num) {

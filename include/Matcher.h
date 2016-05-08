@@ -14,7 +14,7 @@ class Matcher {
 public:
 	Matcher();
 	virtual ~Matcher();
-	virtual bool Matched() = 0;
+	virtual bool Matched(int num) = 0;
 };
 
 } /* namespace kata */

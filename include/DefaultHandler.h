@@ -15,7 +15,7 @@ namespace kata {
 class DefaultHandler: public Handler {
 
 public:
-	DefaultHandler(Action* action);
+	DefaultHandler(Matcher* matcher, Action* action);
 	virtual ~DefaultHandler();
 	virtual bool Matched(int num);
 	virtual string Transfer(int num);

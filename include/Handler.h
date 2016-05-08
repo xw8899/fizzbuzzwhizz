@@ -11,9 +11,10 @@
 using namespace std;
 namespace kata {
 class Action;
+class Matcher;
 class Handler {
 public:
-	Handler(Handler* s, Action* action);
+	Handler(Handler* s, Matcher* matcher, Action* action);
 	virtual ~Handler();
 	virtual bool Matched(int num);
 	virtual string Transfer(int num);
@@ -22,6 +23,7 @@ public:
 private:
 	Handler* _successor;
 	Action* _action;
+	Matcher* _matcher;
 };
 
 } /* namespace kata */

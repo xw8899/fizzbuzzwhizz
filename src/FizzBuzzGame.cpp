@@ -13,6 +13,8 @@
 #include "FizzAction.h"
 #include "BuzzAction.h"
 #include "WhizzAction.h"
+#include "DefaultMatcher.h"
+#include "MultipleMatcher.h"
 
 using namespace std;
 namespace kata {
@@ -21,10 +23,10 @@ FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	_firstDigit = first;
 	_secondDigit = second;
 	_thirdDigit = third;
-	_defaultRule = new DefaultHandler(new DefaultAction());
-	_m1 = new HandlerOfMultiple(_defaultRule, first, new FizzAction());
-	_m2 = new HandlerOfMultiple(_m1, second, new BuzzAction());
-	_m3 = new HandlerOfMultiple(_m2, third, new WhizzAction());
+	_defaultRule = new DefaultHandler(new DefaultMatcher(), new DefaultAction());
+	_m1 = new HandlerOfMultiple(_defaultRule, new MultipleMatcher(first), new FizzAction());
+	_m2 = new HandlerOfMultiple(_m1, new MultipleMatcher(second), new BuzzAction());
+	_m3 = new HandlerOfMultiple(_m2, new MultipleMatcher(third), new WhizzAction());
 }
 
 FizzBuzzGame::~FizzBuzzGame()

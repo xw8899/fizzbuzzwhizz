@@ -9,7 +9,7 @@
 
 namespace kata {
 
-DefaultHandler::DefaultHandler(Action* action) : Handler(NULL, action) {
+DefaultHandler::DefaultHandler(Matcher* matcher, Action* action) : Handler(NULL, matcher, action) {
 	// TODO Auto-generated constructor stub
 
 }

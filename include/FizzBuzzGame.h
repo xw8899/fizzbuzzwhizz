@@ -19,19 +19,14 @@ public:
 	std::string handle(int num);
 
 private:
-	bool contain(int num, int digit);
-	bool IsMultipleOfThirdDigit(int num);
-	bool IsMultipleOfSecondDigit(int num);
-	bool IsMultipleOfFirstDigit(int num);
-	bool IsMultipleOf(int num, int digit);
-
-	int _secondDigit;
-	int _thirdDigit;
-	int _firstDigit;
-	Handler* _defaultRule;
+	Handler* _default;
 	Handler* _m1;
 	Handler* _m2;
 	Handler* _m3;
+	Handler* _m12;
+		Handler* _m23;
+		Handler* _m123;
+		Handler* _mc;
 };
 
 } /* namespace kata */

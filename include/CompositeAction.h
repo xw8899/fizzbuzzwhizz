@@ -14,6 +14,9 @@ namespace kata {
 
 class CompositeAction: public Action {
 public:
+	static CompositeAction* Create2Action(Action* a1, Action* a2);
+	static CompositeAction* Create3Action(Action* a1, Action* a2, Action* a3);
+public:
 	CompositeAction();
 	virtual ~CompositeAction();
 	virtual string Transfer(int num);

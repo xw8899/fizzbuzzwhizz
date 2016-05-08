@@ -9,6 +9,22 @@
 
 namespace kata {
 
+CompositeAction* CompositeAction::Create2Action(Action* a1, Action* a2){
+	CompositeAction* ac = new CompositeAction();
+	ac->AddAction(a1);
+	ac->AddAction(a2);
+	return ac;
+}
+
+CompositeAction* CompositeAction::Create3Action(Action* a1, Action* a2, Action* a3) {
+	CompositeAction* ac = new CompositeAction();
+	ac->AddAction(a1);
+	ac->AddAction(a2);
+	ac->AddAction(a3);
+	return ac;
+
+}
+
 CompositeAction::CompositeAction() {
 }
 

@@ -10,17 +10,18 @@
 #include <string>
 using namespace std;
 namespace kata {
-
+class Action;
 class Handler {
 public:
-	Handler(Handler* s = 0);
+	Handler(Handler* s, Action* action);
 	virtual ~Handler();
 	virtual bool Matched(int num);
 	virtual string Transfer(int num);
 	void SetHandler(Handler* s);
+	string Act(int num);
 private:
 	Handler* _successor;
-
+	Action* _action;
 };
 
 } /* namespace kata */

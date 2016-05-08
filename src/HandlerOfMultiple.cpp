@@ -6,11 +6,10 @@
  */
 
 #include <HandlerOfMultiple.h>
-#include <iostream>
 namespace kata {
 
-HandlerOfMultiple::HandlerOfMultiple(Handler* s, int digit) :
-		Handler(s), _digit(digit) {
+HandlerOfMultiple::HandlerOfMultiple(Handler* s, int digit, Action* action) :
+		Handler(s, action), _digit(digit) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -25,13 +24,7 @@ bool HandlerOfMultiple::Matched(int num) {
 
 string HandlerOfMultiple::Transfer(int num) {
 	if (Matched(num)) {
-		if (_digit == 3)
-			return "fizz";
-		if (_digit == 5)
-			return "buzz";
-		if (_digit == 7)
-			return "whizz";
-		return "norule";
+			return Handler::Act(num);
 	} else {
 		return Handler::Transfer(num);
 	}

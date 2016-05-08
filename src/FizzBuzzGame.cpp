@@ -5,10 +5,15 @@
  *      Author: Administrator
  */
 
+#include <DefaultHandler.h>
 #include <FizzBuzzGame.h>
 #include "Handler.h"
 #include "HandlerOfMultiple.h"
-#include "DefaultRule.h"
+#include "DefaultAction.h"
+#include "FizzAction.h"
+#include "BuzzAction.h"
+#include "WhizzAction.h"
+
 using namespace std;
 namespace kata {
 
@@ -16,10 +21,10 @@ FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	_firstDigit = first;
 	_secondDigit = second;
 	_thirdDigit = third;
-	_defaultRule = new DefaultRule();
-	_m1 = new HandlerOfMultiple(_defaultRule, first);
-	_m2 = new HandlerOfMultiple(_m1, second);
-	_m3 = new HandlerOfMultiple(_m2, third);
+	_defaultRule = new DefaultHandler(new DefaultAction());
+	_m1 = new HandlerOfMultiple(_defaultRule, first, new FizzAction());
+	_m2 = new HandlerOfMultiple(_m1, second, new BuzzAction());
+	_m3 = new HandlerOfMultiple(_m2, third, new WhizzAction());
 }
 
 FizzBuzzGame::~FizzBuzzGame()
@@ -65,6 +70,7 @@ string FizzBuzzGame::handle(int num) {
 			&& IsMultipleOfFirstDigit(num)) {
 		return "fizzbuzz";
 	}
+
 	if (IsMultipleOfThirdDigit(num) && IsMultipleOfSecondDigit(num)) {
 		return "buzzwhizz";
 	}

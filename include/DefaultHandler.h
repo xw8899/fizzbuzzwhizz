@@ -5,21 +5,22 @@
  *      Author: Administrator
  */
 
-#ifndef INCLUDE_DEFAULTRULE_H_
-#define INCLUDE_DEFAULTRULE_H_
+#ifndef INCLUDE_DEFAULTHANDLER_H_
+#define INCLUDE_DEFAULTHANDLER_H_
 
 #include <Handler.h>
 
 namespace kata {
 
-class DefaultRule: public Handler {
+class DefaultHandler: public Handler {
+
 public:
-	DefaultRule();
-	virtual ~DefaultRule();
+	DefaultHandler(Action* action);
+	virtual ~DefaultHandler();
 	virtual bool Matched(int num);
 	virtual string Transfer(int num);
 };
 
 } /* namespace kata */
 
-#endif /* INCLUDE_DEFAULTRULE_H_ */
+#endif /* INCLUDE_DEFAULTHANDLER_H_ */

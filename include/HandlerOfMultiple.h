@@ -11,15 +11,17 @@
 #include <Handler.h>
 
 namespace kata {
+class Action;
 
 class HandlerOfMultiple: public Handler {
 public:
-	HandlerOfMultiple(Handler* s, int digit);
+	HandlerOfMultiple(Handler* s, int digit, Action* action);
 	virtual ~HandlerOfMultiple();
 	virtual bool Matched(int num);
 	virtual std::string Transfer(int num);
 private:
 	int _digit;
+	Action* _action;
 };
 
 } /* namespace kata */

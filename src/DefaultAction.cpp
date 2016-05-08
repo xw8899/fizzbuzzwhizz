@@ -1,29 +1,24 @@
 /*
- * DefaultRule.cpp
+ * DefaultAction.cpp
  *
  *  Created on: 2016Äê5ÔÂ8ÈÕ
  *      Author: Administrator
  */
 
-#include <DefaultRule.h>
+#include <DefaultAction.h>
 #include <sstream>
-
 namespace kata {
 
-DefaultRule::DefaultRule() : Handler(NULL) {
+DefaultAction::DefaultAction() {
 	// TODO Auto-generated constructor stub
 
 }
 
-DefaultRule::~DefaultRule() {
+DefaultAction::~DefaultAction() {
 	// TODO Auto-generated destructor stub
 }
 
-bool DefaultRule::Matched(int num) {
-	return true;
-}
-
-string DefaultRule::Transfer(int num) {
+string DefaultAction::Transfer(int num) {
 
 	ostringstream os;
 	os << num;

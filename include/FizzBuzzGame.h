@@ -11,9 +11,11 @@
 
 namespace kata {
 
+class Handler;
 class FizzBuzzGame {
 public:
 	FizzBuzzGame(int first, int second, int third);
+	~FizzBuzzGame();
 	std::string handle(int num);
 
 private:
@@ -26,6 +28,10 @@ private:
 	int _secondDigit;
 	int _thirdDigit;
 	int _firstDigit;
+	Handler* _defaultRule;
+	Handler* _m1;
+	Handler* _m2;
+	Handler* _m3;
 };
 
 } /* namespace kata */

@@ -6,7 +6,9 @@
  */
 
 #include <FizzBuzzGame.h>
-#include <sstream>
+#include "Handler.h"
+#include "HandlerOfMultiple.h"
+#include "DefaultRule.h"
 using namespace std;
 namespace kata {
 
@@ -14,6 +16,18 @@ FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	_firstDigit = first;
 	_secondDigit = second;
 	_thirdDigit = third;
+	_defaultRule = new DefaultRule();
+	_m1 = new HandlerOfMultiple(_defaultRule, first);
+	_m2 = new HandlerOfMultiple(_m1, second);
+	_m3 = new HandlerOfMultiple(_m2, third);
+}
+
+FizzBuzzGame::~FizzBuzzGame()
+{
+	delete _defaultRule;
+	delete _m1;
+	delete _m2;
+	delete _m3;
 }
 
 bool FizzBuzzGame::contain(int num, int digit) {
@@ -55,21 +69,7 @@ string FizzBuzzGame::handle(int num) {
 		return "buzzwhizz";
 	}
 
-	if (IsMultipleOfFirstDigit(num)) {
-		return "fizz";
-	}
-
-	if (IsMultipleOfSecondDigit(num)) {
-		return "buzz";
-	}
-
-	if (IsMultipleOfThirdDigit(num)) {
-		return "whizz";
-	}
-
-	ostringstream os;
-	os << num;
-	return os.str();
+	return _m3->Transfer(num);
 }
 
 } /* namespace kata */

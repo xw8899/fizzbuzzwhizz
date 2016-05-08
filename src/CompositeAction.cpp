@@ -9,43 +9,28 @@
 
 namespace kata {
 
-CompositeAction* CompositeAction::Create2Action(Action* a1, Action* a2){
-	CompositeAction* ac = new CompositeAction();
-	ac->AddAction(a1);
-	ac->AddAction(a2);
-	return ac;
-}
-
-CompositeAction* CompositeAction::Create3Action(Action* a1, Action* a2, Action* a3) {
-	CompositeAction* ac = new CompositeAction();
-	ac->AddAction(a1);
-	ac->AddAction(a2);
-	ac->AddAction(a3);
-	return ac;
-
-}
-
-CompositeAction::CompositeAction() {
-}
-
-void CompositeAction::AddAction(Action* act)
-{
-	_actions.push_back(act);
+CompositeAction::CompositeAction(const vector<Action*>& acts) {
+	_actions.assign(acts.begin(), acts.end());
 }
 
 CompositeAction::~CompositeAction() {
-	for (vector<Action*>::iterator it = _actions.begin(); it != _actions.end(); ++it)
-	{
-		delete (*it);
+//	for (vector<Action*>::iterator it = _actions.begin(); it != _actions.end(); ++it)
+//	{
+//		delete (*it);
+//	}
+	for (Action* act : _actions) {
+		delete act;
 	}
 }
 
-string CompositeAction::Transfer(int num)
-{
+string CompositeAction::Transfer(int num) {
 	string s;
-	for (vector<Action*>::iterator it = _actions.begin(); it != _actions.end(); ++it)
-	{
-		s = s + (*it)->Transfer(num);
+//	for (vector<Action*>::iterator it = _actions.begin(); it != _actions.end(); ++it)
+//	{
+//		s = s + (*it)->Transfer(num);
+//	}
+	for (Action* act : _actions) {
+		s = s + act->Transfer(num);
 	}
 	return s;
 }

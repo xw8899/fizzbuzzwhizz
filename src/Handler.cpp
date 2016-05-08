@@ -34,10 +34,9 @@ string Handler::Transfer(int num) {
 	{
 		return Act(num);
 	}
-	else
+	else if (_successor != 0)
 	{
-		if (_successor != 0)
-			return _successor->Transfer(num);
+		return _successor->Transfer(num);
 	}
 
 	return "nohandler";

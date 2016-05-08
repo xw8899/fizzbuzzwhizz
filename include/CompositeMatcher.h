@@ -15,10 +15,7 @@ namespace kata {
 
 class CompositeMatcher: public Matcher {
 public:
-	static CompositeMatcher* Create2Matcher(Matcher* a1, Matcher* a2);
-	static CompositeMatcher* Create3Matcher(Matcher* a1, Matcher* a2, Matcher* a3);
-public:
-	CompositeMatcher();
+	CompositeMatcher(const vector<Matcher*>&);
 	virtual ~CompositeMatcher();
 	virtual bool Matched(int num);
 	void AddMatcher(Matcher* ma);

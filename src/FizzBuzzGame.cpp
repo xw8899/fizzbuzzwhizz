@@ -31,16 +31,16 @@ FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	_handlers.push_back(_m3);
 
 	Handler* _m12 = new Handler(_m3,
-    		CompositeMatcher::Create2Matcher(new MultipleMatcher(first), new MultipleMatcher(second)),
-			CompositeAction::Create2Action(new FizzAction(), new BuzzAction()));
+    		new CompositeMatcher({new MultipleMatcher(first), new MultipleMatcher(second)}),
+			new CompositeAction({new FizzAction(), new BuzzAction()}));
     _handlers.push_back(_m12);
     Handler* _m23 = new Handler(_m12,
-    		CompositeMatcher::Create2Matcher(new MultipleMatcher(second), new MultipleMatcher(third)),
-    		CompositeAction::Create2Action(new BuzzAction(), new WhizzAction()));
+    		new CompositeMatcher({new MultipleMatcher(second), new MultipleMatcher(third)}),
+			new CompositeAction({new BuzzAction(), new WhizzAction()}));
     _handlers.push_back(_m23);
     Handler* _m123 = new Handler(_m23,
-    		CompositeMatcher::Create3Matcher(new MultipleMatcher(first),new MultipleMatcher(second),new MultipleMatcher(third)),
-			CompositeAction::Create3Action(new FizzAction(),new BuzzAction(),new WhizzAction()));
+    		new CompositeMatcher({new MultipleMatcher(first),new MultipleMatcher(second),new MultipleMatcher(third)}),
+			new CompositeAction({new FizzAction(),new BuzzAction(),new WhizzAction()}));
     _handlers.push_back(_m123);
     Handler* _mc = new Handler(_m123, new ContainMatcher(first), new FizzAction());
     _handlers.push_back(_mc);

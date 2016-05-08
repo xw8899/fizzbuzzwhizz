@@ -9,25 +9,8 @@
 
 namespace kata {
 
-CompositeMatcher* CompositeMatcher::Create2Matcher(Matcher* a1, Matcher* a2)
-{
-	CompositeMatcher* m = new CompositeMatcher();
-	m->AddMatcher(a1);
-	m->AddMatcher(a2);
-	return m;
-}
-CompositeMatcher* CompositeMatcher::Create3Matcher(Matcher* a1, Matcher* a2, Matcher* a3)
-{
-	CompositeMatcher* m = new CompositeMatcher();
-	m->AddMatcher(a1);
-	m->AddMatcher(a2);
-	m->AddMatcher(a3);
-	return m;
-}
-
-CompositeMatcher::CompositeMatcher() {
-	// TODO Auto-generated constructor stub
-
+CompositeMatcher::CompositeMatcher(const vector<Matcher*>& matchers) {
+	_matchers.assign(matchers.begin(), matchers.end());
 }
 
 CompositeMatcher::~CompositeMatcher() {

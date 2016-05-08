@@ -22,8 +22,8 @@ public:
 	string Act(int num);
 private:
 	Handler* _successor;
-	Action* _action;
 	Matcher* _matcher;
+	Action* _action;
 };
 
 } /* namespace kata */

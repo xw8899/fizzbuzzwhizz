@@ -9,12 +9,18 @@
 
 namespace kata {
 
+Action::Action(const string& name) : _name(name) {
+	// TODO Auto-generated constructor stub
+
+}
+
 Action::~Action() {
 	// TODO Auto-generated destructor stub
 }
 
-Action::Action() {
-	// TODO Auto-generated constructor stub
+string Action::Transfer(int num)
+{
+	return _name;
 
 }
 

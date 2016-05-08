@@ -9,9 +9,8 @@
 #include <sstream>
 namespace kata {
 
-DefaultAction::DefaultAction() {
+DefaultAction::DefaultAction() : Action("nop") {
 	// TODO Auto-generated constructor stub
-
 }
 
 DefaultAction::~DefaultAction() {

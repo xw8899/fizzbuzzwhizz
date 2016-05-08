@@ -8,9 +8,6 @@
 #include <FizzBuzzGame.h>
 #include "Handler.h"
 #include "DefaultAction.h"
-#include "FizzAction.h"
-#include "BuzzAction.h"
-#include "WhizzAction.h"
 #include "DefaultMatcher.h"
 #include "MultipleMatcher.h"
 #include "CompositeAction.h"
@@ -23,28 +20,27 @@ namespace kata {
 FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
 	Handler* _default = new Handler(NULL, new DefaultMatcher(), new DefaultAction());
 	_handlers.push_back(_default);
-	Handler* _m1 = new Handler(_default, new MultipleMatcher(first),new FizzAction());
+	Handler* _m1 = new Handler(_default, new MultipleMatcher(first),new Action("fizz"));
 	_handlers.push_back(_m1);
-	Handler* _m2 = new Handler(_m1, new MultipleMatcher(second), new BuzzAction());
+	Handler* _m2 = new Handler(_m1, new MultipleMatcher(second), new Action("buzz"));
 	_handlers.push_back(_m2);
-	Handler* _m3 = new Handler(_m2, new MultipleMatcher(third), new WhizzAction());
+	Handler* _m3 = new Handler(_m2, new MultipleMatcher(third), new Action("whizz"));
 	_handlers.push_back(_m3);
 
 	Handler* _m12 = new Handler(_m3,
     		new CompositeMatcher({new MultipleMatcher(first), new MultipleMatcher(second)}),
-			new CompositeAction({new FizzAction(), new BuzzAction()}));
+			new CompositeAction({new Action("fizz"), new Action("buzz")}));
     _handlers.push_back(_m12);
     Handler* _m23 = new Handler(_m12,
     		new CompositeMatcher({new MultipleMatcher(second), new MultipleMatcher(third)}),
-			new CompositeAction({new BuzzAction(), new WhizzAction()}));
+			new CompositeAction({new Action("buzz"), new Action("whizz")}));
     _handlers.push_back(_m23);
     Handler* _m123 = new Handler(_m23,
     		new CompositeMatcher({new MultipleMatcher(first),new MultipleMatcher(second),new MultipleMatcher(third)}),
-			new CompositeAction({new FizzAction(),new BuzzAction(),new WhizzAction()}));
+			new CompositeAction({new Action("fizz"),new Action("buzz"),new Action("whizz")}));
     _handlers.push_back(_m123);
-    Handler* _mc = new Handler(_m123, new ContainMatcher(first), new FizzAction());
+    Handler* _mc = new Handler(_m123, new ContainMatcher(first), new Action("fizz"));
     _handlers.push_back(_mc);
-
 }
 
 FizzBuzzGame::~FizzBuzzGame() {

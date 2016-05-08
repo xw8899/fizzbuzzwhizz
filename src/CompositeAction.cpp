@@ -9,7 +9,7 @@
 
 namespace kata {
 
-CompositeAction::CompositeAction(const vector<Action*>& acts) {
+CompositeAction::CompositeAction(const vector<Action*>& acts) : Action("composite") {
 	_actions.assign(acts.begin(), acts.end());
 }
 

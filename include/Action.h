@@ -12,10 +12,12 @@ using namespace std;
 namespace kata {
 
 class Action {
+	string _name;
+
 public:
+	Action(const string&);
 	virtual ~Action();
-	Action();
-	virtual string Transfer(int num) = 0;
+	virtual string Transfer(int num);
 };
 
 } /* namespace kata */

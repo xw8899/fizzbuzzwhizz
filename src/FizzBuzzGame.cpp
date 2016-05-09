@@ -5,85 +5,59 @@
  *      Author: Administrator
  */
 
-#include <FizzBuzzGame.h>
-#include <sstream>
-#include "Contain.h"
-#include "MultipleOf.h"
-#include "AllOf.h"
-#include "AnyOf.h"
-using namespace std;
+#include "FizzBuzzGame.h"
+#include "Handler.h"
+#include "DefaultAction.h"
+#include "DefaultMatcher.h"
+#include "MultipleMatcher.h"
+#include "CompositeAction.h"
+#include "CompositeMatcher.h"
+#include "ContainMatcher.h"
+
 namespace kata {
 
+const char* FIZZ = "fizz";
+const char* BUZZ = "buzz";
+const char* WHIZZ = "whizz";
+
 FizzBuzzGame::FizzBuzzGame(int first, int second, int third) {
-	_firstDigit = first;
-	_secondDigit = second;
-	_thirdDigit = third;
-	_containFirstDigit = new Contain(first);
-	_multipleOfFirstDigit = new MultipleOf(first);
-	_multipleOfSecondDigit = new MultipleOf(second);
-	_multipleOfThirdDigit = new MultipleOf(third);
-	_allOf123 = new AllOf();
-	_allOf123->AddRule(_multipleOfFirstDigit);
-	_allOf123->AddRule(_multipleOfSecondDigit);
-	_allOf123->AddRule(_multipleOfThirdDigit);
-	_allOf12 = new AllOf();
-	_allOf12->AddRule(_multipleOfFirstDigit);
-	_allOf12->AddRule(_multipleOfSecondDigit);
-	_allOf23 = new AllOf();
-	_allOf23->AddRule(_multipleOfSecondDigit);
-	_allOf23->AddRule(_multipleOfThirdDigit);
-	_anyOf = new AnyOf();
-	_anyOf->AddRule(_containFirstDigit);
-	_anyOf->AddRule(_allOf123);
-	_anyOf->AddRule(_allOf12);
-	_anyOf->AddRule(_allOf23);
-	_anyOf->AddRule(_multipleOfFirstDigit);
-	_anyOf->AddRule(_multipleOfSecondDigit);
-	_anyOf->AddRule(_multipleOfThirdDigit);
+	Handler* _default = new Handler(NULL, new DefaultMatcher(), new DefaultAction());
+	_handlers.push_back(_default);
+	Handler* _m1 = new Handler(_default, new MultipleMatcher(first), new Action(FIZZ));
+	_handlers.push_back(_m1);
+	Handler* _m2 = new Handler(_m1, new MultipleMatcher(second), new Action(BUZZ));
+	_handlers.push_back(_m2);
+	Handler* _m3 = new Handler(_m2, new MultipleMatcher(third),	new Action(WHIZZ));
+	_handlers.push_back(_m3);
+
+	Handler* _m12 = new Handler(_m3,
+    		new CompositeMatcher({new MultipleMatcher(first), new MultipleMatcher(second)}),
+			new CompositeAction({new Action(FIZZ), new Action(BUZZ)}));
+    _handlers.push_back(_m12);
+
+    Handler* _m23 = new Handler(_m12,
+    		new CompositeMatcher({new MultipleMatcher(second), new MultipleMatcher(third)}),
+			new CompositeAction({new Action(BUZZ), new Action(WHIZZ)}));
+    _handlers.push_back(_m23);
+
+    Handler* _m123 = new Handler(_m23,
+    		new CompositeMatcher({new MultipleMatcher(first),new MultipleMatcher(second),new MultipleMatcher(third)}),
+			new CompositeAction({new Action(FIZZ),new Action(BUZZ),new Action(WHIZZ)}));
+    _handlers.push_back(_m123);
+
+    Handler* _mc = new Handler(_m123, new ContainMatcher(first), new Action(FIZZ));
+    _handlers.push_back(_mc);
 }
 
 FizzBuzzGame::~FizzBuzzGame() {
-	delete _containFirstDigit;
-	delete _multipleOfFirstDigit;
-	delete _multipleOfSecondDigit;
-	delete _multipleOfThirdDigit;
-	delete _allOf123;
-	delete _allOf12;
-	delete _allOf23;
-	delete _anyOf;
+	for (Handler* handler : _handlers)
+	{
+		delete handler;
+	}
 }
 
 string FizzBuzzGame::handle(int num) {
-	if (_containFirstDigit->Matched(num)) {
-		return "fizz";
-	}
-
-	if (_allOf123->Matched(num)) {
-		return "fizzbuzzwhizz";
-	}
-
-	if (_allOf12->Matched(num)) {
-		return "fizzbuzz";
-	}
-	if (_allOf23->Matched(num)) {
-		return "buzzwhizz";
-	}
-
-	if (_multipleOfFirstDigit->Matched(num)) {
-		return "fizz";
-	}
-
-	if (_multipleOfSecondDigit->Matched(num)) {
-		return "buzz";
-	}
-
-	if (_multipleOfThirdDigit->Matched(num)) {
-		return "whizz";
-	}
-
-	ostringstream os;
-	os << num;
-	return os.str();
+	return _handlers.back()->Transfer(num);
 }
 
 } /* namespace kata */

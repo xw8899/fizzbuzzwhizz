@@ -18,8 +18,6 @@ public:
 	virtual ~Handler();
 	virtual bool Matched(int num);
 	virtual string Transfer(int num);
-	void SetHandler(Handler* s);
-	string Act(int num);
 private:
 	Handler* _successor;
 	Matcher* _matcher;

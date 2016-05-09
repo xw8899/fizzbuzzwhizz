@@ -14,9 +14,8 @@ CompositeMatcher::CompositeMatcher(const vector<Matcher*>& matchers) {
 }
 
 CompositeMatcher::~CompositeMatcher() {
-	for (vector<Matcher*>::iterator it = _matchers.begin();
-			it != _matchers.end(); ++it) {
-		delete (*it);
+	for (Matcher* matcher : _matchers) {
+		delete matcher;
 	}
 }
 bool CompositeMatcher::Matched(int num) {
@@ -24,9 +23,8 @@ bool CompositeMatcher::Matched(int num) {
 	{
 		return false;
 	}
-	for (vector<Matcher*>::iterator it = _matchers.begin();
-			it != _matchers.end(); ++it) {
-		if (!(*it)->Matched(num))
+	for (Matcher* matcher : _matchers) {
+		if (!matcher->Matched(num))
 		{
 			return false;
 		}

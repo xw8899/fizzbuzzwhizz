@@ -20,11 +20,6 @@ Handler::~Handler() {
 	delete _matcher;
 }
 
-string Handler::Act(int num)
-{
-	return _action->Transfer(num);
-}
-
 bool Handler::Matched(int num) {
 	return _matcher->Matched(num);
 }
@@ -32,7 +27,7 @@ bool Handler::Matched(int num) {
 string Handler::Transfer(int num) {
 	if (Matched(num))
 	{
-		return Act(num);
+		return _action->Transfer(num);
 	}
 	else if (_successor != 0)
 	{
@@ -40,11 +35,6 @@ string Handler::Transfer(int num) {
 	}
 
 	return "nohandler";
-}
-
-void Handler::SetHandler(Handler* s)
-{
-	_successor = s;
 }
 
 } /* namespace kata */
